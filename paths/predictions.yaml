@@ -1,0 +1,17 @@
+get:
+  description: Radiosonde landing predictions
+  parameters:
+    - name: vehicles
+      in: query
+      description: >-
+        If provided, filters predictions to a single provided serial number.
+        Should be provided, but left blank if no filtering is required.
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Prediction results
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/predictions.yaml

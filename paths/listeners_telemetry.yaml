@@ -1,0 +1,41 @@
+get:
+  summary: Request Listener Telemetry Data
+  description: |
+    Use this to get the current listener (chase car / station) telemetry
+  parameters:
+    - name: duration
+      in: query
+      description: >-
+        How far back in time to receive data from. A shorter time period will
+        result is higher time resolution data.
+      schema:
+        type: string
+        enum:
+          - 3h
+          - 6h
+          - 1d
+          - 3d
+    - name: uploader_callsign
+      in: query
+      description: >-
+        Specific callsign number to query (if wanted). Requests for data for a
+        single uploader will return the highest time resolution data available.
+      schema:
+        type: string
+    - name: datetime
+      in: query
+      description: >-
+        End time to query as an ISO-8601 time string. Defaults to now. Example:
+        `2021-02-02T11:27:38.634Z`
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: >-
+        Returns a dictionary keyed by uploader_callsign of a dictionary of times
+        with listener data.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/listener_results_format.yaml

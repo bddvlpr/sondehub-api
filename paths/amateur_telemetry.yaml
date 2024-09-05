@@ -1,0 +1,71 @@
+get:
+  tags:
+    - amateur
+  summary: Request Amateur Radiosonde Telemetry Data
+  description: >
+    Use this to get the current state of all the radiosondes then use the
+    realtime API to access streaming data. Do not regularly poll this endpoint,
+    it is rate limited.
+  parameters:
+    - name: duration
+      in: query
+      description: >-
+        How far back in time to receive data from. A shorter time period will
+        result is higher time resolution data.
+      schema:
+        type: string
+        enum:
+          - '0'
+          - 15s
+          - 1m
+          - 30m
+          - 1h
+          - 3h
+          - 6h
+          - 1d
+          - 3d
+    - name: payload_callsign
+      in: query
+      description: >-
+        Specific callsign to query (if wanted). Requests for data for a single
+        sonde will return the highest time resolution data available.
+      schema:
+        type: string
+    - name: datetime
+      in: query
+      description: >-
+        End time to query as an ISO-8601 time string. Defaults to now. Example:
+        `2021-02-02T11:27:38.634Z`
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: >-
+        Returns a dictionary keyed by serial number of a dictionary of times
+        with SondeHub Telemetry values
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/amateur_query_results_format.yaml
+put:
+  tags:
+    - amateur
+  summary: Upload Radiosonde Telemetry to Sondehub amateur database.
+  parameters:
+    - name: User-Agent
+      in: header
+      description: >-
+        The software and version performing the telemetry upload, eg: 
+        `autorx-1.4.1-beta5`
+      schema:
+        type: string
+  requestBody:
+    $ref: ../components/requestBodies/input_amateur_payloads.yaml
+  responses:
+    '200':
+      description: Telemetry Saved into Database Successfuly
+      content: {}
+    '500':
+      description: Other Server error (including malformed data submissions)
+      content: {}

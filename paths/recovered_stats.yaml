@@ -1,0 +1,40 @@
+get:
+  summary: Request Recovery Stats
+  description: |
+    Use this to get the recovery stats
+  parameters:
+    - name: lat
+      in: query
+      description: 'Latitude - if specified, lon and distance are required. Eg: -34.9285'
+      schema:
+        type: number
+    - name: lon
+      in: query
+      description: 'Longitude - if specified, lat and distance are required Eg:  138.6007'
+      schema:
+        type: number
+    - name: distance
+      in: query
+      description: Distance in meters - if specified, lat and lon are required
+      schema:
+        type: number
+    - name: duration
+      in: query
+      description: How far back to search in seconds. Defaults to foreverl
+      schema:
+        type: number
+    - name: datetime
+      in: query
+      description: >-
+        End time to query as an ISO-8601 time string. Defaults to now. Example:
+        `2021-02-02T11:27:38.634Z`
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: Returns a list of recovery objects
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/recovery_stats.yaml

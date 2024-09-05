@@ -1,0 +1,34 @@
+get:
+  summary: >-
+    Request latest sonde data indexed by serial number, with options for
+    position/distance based-filtering.
+  parameters:
+    - name: lat
+      in: query
+      description: 'Latitude - if specified, lon and distance are required. Eg: -34.9285'
+      schema:
+        type: number
+    - name: lon
+      in: query
+      description: 'Longitude - if specified, lat and distance are required Eg:  138.6007'
+      schema:
+        type: number
+    - name: distance
+      in: query
+      description: Distance in meters - if specified, lat and lon are required
+      schema:
+        type: number
+    - name: last
+      in: query
+      description: How far back to search in seconds. Defaults to 24hrs
+      schema:
+        type: number
+  responses:
+    '200':
+      description: >-
+        Returns a dictionary keyed by serial number of a dictionary of times
+        with SondeHub Telemetry values
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/sonde_telm_results_format.yaml

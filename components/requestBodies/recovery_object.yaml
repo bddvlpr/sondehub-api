@@ -1,0 +1,8 @@
+content:
+  '*/*':
+    schema:
+      type: array
+      description: SondeHub recovery format
+      items:
+        $ref: ../schemas/recovery_object.yaml
+required: true

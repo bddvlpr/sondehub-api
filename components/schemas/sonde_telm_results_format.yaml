@@ -1,0 +1,4 @@
+type: object
+properties:
+  serial:
+    $ref: ./telemetry_format.yaml

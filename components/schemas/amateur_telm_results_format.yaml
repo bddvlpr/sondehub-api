@@ -1,0 +1,4 @@
+type: object
+properties:
+  serial:
+    $ref: ./amateur_telemetry_format.yaml

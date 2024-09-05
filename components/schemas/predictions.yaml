@@ -1,0 +1,29 @@
+type: array
+items:
+  type: object
+  properties:
+    vehicle:
+      type: string
+      description: callsign / serial of the radiosonde
+    time:
+      type: string
+      format: date-time
+    latitude:
+      type: number
+    longitude:
+      type: number
+    altitude:
+      type: number
+    ascent_rate:
+      type: number
+    descent_rate:
+      type: number
+    burst_altitude:
+      type: number
+    landed:
+      type: object
+    data:
+      type: string
+      description: >-
+        This is the json output from the Tāwhirimātea predictor
+        http://tawhiri.cusf.co.uk

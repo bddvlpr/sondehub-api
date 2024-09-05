@@ -1,0 +1,24 @@
+required:
+  - chaser_count
+  - failed
+  - recovered
+  - top_chasers
+  - total
+type: object
+properties:
+  total:
+    type: number
+    description: Total number of serial numbers that have had at least one attempt
+  recovered:
+    type: number
+    description: Total number of serial numbers that have been recovered
+  failed:
+    type: number
+    description: Total number of serial numbers that have a failed recovered attempt
+  chaser_count:
+    type: number
+    description: Total number of unique recovery names
+  top_chasers:
+    type: object
+    properties: {}
+    description: 'chaser name : number of attempted recoveries'

@@ -1,0 +1,8 @@
+content:
+  '*/*':
+    schema:
+      type: array
+      description: SondeHub telemetry format
+      items:
+        $ref: ../schemas/telemetry_format.yaml
+required: true

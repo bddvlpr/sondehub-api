@@ -1,0 +1,8 @@
+content:
+  '*/*':
+    schema:
+      type: array
+      description: SondeHub amateur telemetry format
+      items:
+        $ref: ../schemas/amateur_telemetry_format.yaml
+required: true

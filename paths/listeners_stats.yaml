@@ -1,0 +1,11 @@
+get:
+  summary: Basic version stats
+  description: |
+    Use this to get stats on how many users are using specific software
+  responses:
+    '200':
+      description: Returns a dictionary of softwares and versions
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/listener_stats.yaml

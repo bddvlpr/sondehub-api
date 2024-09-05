@@ -1,0 +1,23 @@
+get:
+  summary: Request telemetry data for an individual radiosonde
+  description: >
+    Use this to request all available telemetry data for an individual
+    radiosonde, specified by serial number.
+  parameters:
+    - name: serial
+      in: path
+      description: Serial number of the radiosonde to request data for. e.g. S1130567
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: >-
+        Returns a time-sorted array of SondeHub Telemetry objects. If no data
+        for the requested serial number is available, the array will be empty.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/telemetry_format.yaml

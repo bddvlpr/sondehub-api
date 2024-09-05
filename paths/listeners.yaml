@@ -1,0 +1,16 @@
+put:
+  summary: >-
+    Allows a station to upload their station information to the SondeHub
+    database, for display on the SondeHub Tracker map. This endpoint can also be
+    used to upload chase-car positions by setting the "mobile" setting to True
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/listener.yaml
+    required: true
+  responses:
+    '200':
+      description: Station Position successfully uploaded.
+      content: {}
+  x-codegen-request-body-name: body

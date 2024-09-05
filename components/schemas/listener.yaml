@@ -1,0 +1,37 @@
+type: object
+properties:
+  software_name:
+    type: string
+    description: 'Software Name, # e.g. radiosonde_auto_rx'
+  software_version:
+    type: string
+    description: Software version number,  e.g. 1.5.1
+  uploader_callsign:
+    type: string
+    description: 'Station callsign, # e.g. CHANGEME_AUTO_RX'
+  uploader_position:
+    maxItems: 3
+    minItems: 3
+    type: array
+    description: >-
+      Station position, as a list [lat, lon, alt] Note: This may be set to null,
+      which will result in the station position not appearing on the map.
+    items:
+      type: number
+      format: double
+  uploader_radio:
+    type: string
+    description: Uploader's radio description
+  uploader_antenna:
+    type: string
+    description: Uploader's antenna description
+  uploader_contact_email:
+    type: string
+    description: >-
+      Optional contact e-mail, to assist SondeHub admins in resolving faults.
+      e.g. user_contact_email@host.com
+  mobile:
+    type: boolean
+    description: >-
+      Indicates that the station is mobile, and should appear as a chase car on
+      the tracker map. Set to false if this is a fixed station.

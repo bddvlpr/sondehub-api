@@ -1,0 +1,75 @@
+get:
+  summary: Request Recovery Data
+  description: |
+    Use this to get the recovery data 
+  parameters:
+    - name: serial
+      in: query
+      description: >-
+        radiosonde serial number (or multiple serial numbers separated by a
+        comma) to filter on. If none provided all serials will be presented.
+      schema:
+        type: string
+    - name: lat
+      in: query
+      description: 'Latitude - if specified, lon and distance are required. Eg: -34.9285'
+      schema:
+        type: number
+    - name: lon
+      in: query
+      description: 'Longitude - if specified, lat and distance are required Eg:  138.6007'
+      schema:
+        type: number
+    - name: distance
+      in: query
+      description: Distance in meters - if specified, lat and lon are required
+      schema:
+        type: number
+    - name: last
+      in: query
+      description: How far back to search in seconds. Defaults to 3 days. Set to 0 for all
+      schema:
+        type: number
+  responses:
+    '200':
+      description: Returns a list of recovery objects
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/recovery_results_format.yaml
+put:
+  summary: >-
+    Adds a recovery object to the SondeHub database to indicate if a radiosonde
+    was recovered
+  parameters:
+    - name: Date
+      in: header
+      description: >-
+        <day-name>, <day> <month> <year> <hour>:<minute>:<second> UTC as per
+        RFC7231. This is used to calculate receiver time offset for correcting
+        clients that have the incorrect time.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: User-Agent
+      in: header
+      description: >-
+        The software and version performing the telemetry upload, eg: 
+        `autorx-1.4.1-beta5`
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/recovery_object.yaml
+    required: true
+  responses:
+    '200':
+      description: Recovery logged
+      content: {}
+    '500':
+      description: Other Server error (including malformed data submissions)
+      content: {}
+  x-codegen-request-body-name: body

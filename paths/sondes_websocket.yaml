@@ -1,0 +1,6 @@
+get:
+  description: Gets a presigned URL for use in connecting to the MQTT websocket endpoint.
+  responses:
+    '200':
+      description: A presigned URL for connecting to the websocket MQTT feed.
+      content: {}

@@ -1,0 +1,43 @@
+get:
+  tags:
+    - amateur
+  summary: Request Amateur Radiosonde Telemetry Data
+  description: >
+    Use this to get the current state of all the radiosondes then use the
+    realtime API to access streaming data. Do not regularly poll this endpoint,
+    it is rate limited.
+  parameters:
+    - name: last
+      in: query
+      description: How far back to search in seconds. Defaults to 24hrs
+      schema:
+        type: number
+    - name: datetime
+      in: query
+      description: >-
+        End time to query as an ISO-8601 time string. Defaults to now. Example:
+        `2021-02-02T11:27:38.634Z`
+      schema:
+        type: string
+        format: date-time
+    - name: payload_callsign
+      in: path
+      description: >-
+        Specific callsign to query (if wanted). Requests for data for a single
+        sonde will return the highest time resolution data available.
+      required: true
+      schema:
+        type: string
+    - name: format
+      in: query
+      description: Valid options are csv, kml or json
+      schema:
+        type: string
+        format: string
+  responses:
+    '200':
+      description: Returns a list of all data received
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/amateur_query_full_results_format.yaml

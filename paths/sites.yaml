@@ -1,0 +1,11 @@
+get:
+  description: Radiosonde launch sites
+  responses:
+    '200':
+      description: Prediction results
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              $ref: ../components/schemas/site.yaml

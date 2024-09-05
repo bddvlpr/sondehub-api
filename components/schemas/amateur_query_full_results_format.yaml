@@ -1,0 +1,3 @@
+type: array
+items:
+  $ref: ./amateur_telemetry_format.yaml

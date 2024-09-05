@@ -1,0 +1,196 @@
+required:
+  - alt
+  - datetime
+  - frame
+  - lat
+  - lon
+  - manufacturer
+  - serial
+  - software_name
+  - software_version
+  - time_received
+  - type
+  - uploader_callsign
+type: object
+properties:
+  dev:
+    type: string
+    description: >
+      If this field is set then the payload will not be uploaded to the
+      database. This is useful for development and testing.
+  software_name:
+    type: string
+    description: |
+      Name of the decoding software
+      e.g. 'radiosonde_auto_rx', 'dxlAPRS', 'RS41Tracker', 'mySondy'
+  software_version:
+    type: string
+    description: |
+      Version of the decoding software
+      e.g. '1.4.0', '20210115'
+  uploader_callsign:
+    type: string
+    description: >
+      Callsign of the uploader
+
+      Arbitrary string. Uploader position information and other metadata will be
+      handled separately, but will need to match this callsign to enable
+      calculation of listener statistics.
+  time_received:
+    type: string
+    description: >
+      The time the telemetry packet was received. UTC time in
+      YYYY-MM-DDTHH:MM:SS.SSSSSSZ format.
+    format: date-time
+  manufacturer:
+    type: string
+    description: >-
+      Radiosonde Manufacturer, as determined from the transmit modulation and
+      high-level packet format.
+    enum:
+      - Vaisala
+      - Graw
+      - Meteomodem
+      - Intermet Systems
+      - Lockheed Martin
+      - Meteo-Radiy
+      - Meteosis
+      - Meisei
+  type:
+    type: string
+    description: >-
+      The high-level radiosonde model, as can be determined just from the
+      transmit modulation and high-level packet format.
+    enum:
+      - RS41
+      - DFM
+      - M10
+      - M20
+      - iMet-4
+      - iMet-50
+      - iMet-54
+      - LMS6-400
+      - LMS6-1680
+      - MRZ
+      - MTS01
+      - iMS-100
+      - RS-11G
+  serial:
+    type: string
+    description: >
+      Radiosonde Serial Number. Where possible this should be in the format
+      which matches the sticker/label on the radiosonde itself
+
+      iMet-1/iMet-4 sondes do not provide a serial number, and so auto_rx
+      [generates](https://github.com/projecthorus/radiosonde_auto_rx/wiki/Model-Specific-Notes#intermet-imet-1--imet-4)
+      a serial number based on launch time and transmit frequency. DFM sondes do
+      not regularly transmit their serial number, and so data from these sondes
+      should not be uploaded before the serial number is known.
+  frame:
+    type: number
+    description: >
+      Frame Number, ideally unique over the entire flight. Should be taken from
+      the telemetry. For some radiosondes (DFM, M10, M20), the datetime
+      (converted to a unix time) is used instead of the provided frame number.
+    format: integer
+  datetime:
+    type: string
+    description: >
+      Date/Time from the sonde's GPS, provided in YYYY-MM-DDTHH:MM:SS.SSSSSSZ
+      format
+
+      Some sondes (e.g. iMet, LMS6) do not provide the date portion of the
+      timestamp. In this situation, the date portion should be added on by the
+      receiver. An example of how to handle this problem is [available
+      here](https://github.com/projecthorus/radiosonde_auto_rx/blob/master/auto_rx/autorx/sonde_specific.py#L13).
+    format: date-time
+  lat:
+    type: number
+    description: Latitude (decimal degrees)
+    format: double
+  lon:
+    type: number
+    description: Longitude (decimal degrees)
+    format: double
+  alt:
+    type: number
+    description: Altitude (metres)
+    format: double
+  subtype:
+    type: string
+    description: >-
+      Detailed Radiosonde Model Type, as determined through analysis of the
+      telemetry.
+    enum:
+      - RS41-SG
+      - RS41-SGP
+      - RS41-SGM
+      - DFM06
+      - DFM09
+      - DFM09P
+      - DFM17
+      - M10
+      - M20
+      - MRZ-H1
+  frequency:
+    type: number
+    description: Transmit frequency of the radiosonde in MHz.
+    format: float
+  temp:
+    type: number
+    description: Measured Temperature (deg C)
+    format: float
+  humidity:
+    type: number
+    description: Measured Relative Humidity (%)
+    format: float
+  vel_h:
+    type: number
+    description: Horizontal Velocity (m/s)
+    format: float
+  vel_v:
+    type: number
+    description: Horizontal Velocity (m/s)
+    format: float
+  pressure:
+    type: number
+    description: Measured Pressure (hPa)
+    format: float
+  heading:
+    type: number
+    description: Heading (degrees True)
+    format: float
+  batt:
+    type: number
+    description: Battery Voltage (volts)
+    format: float
+  sats:
+    type: number
+    description: Number of SVs used in position solution
+    format: integer
+  xdata:
+    type: string
+    description: Auxiliary Data (e.g Ozone data) as a hexadecimal string.
+    format: ascii hex
+  snr:
+    type: number
+    description: Signal-to-Noise ratio of the received signal, in dB
+    format: float
+  rssi:
+    type: number
+    description: >-
+      Received-Signal-Strength-Indication of the radiosonde signal, nominally in
+      dBm
+    format: float
+  uploader_position:
+    maxItems: 3
+    minItems: 3
+    type: array
+    description: Station position, as a list [lat, lon, alt].
+    items:
+      type: number
+      format: double
+  uploader_antenna:
+    type: string
+    description: Station antenna/receiver information, free-text string.
+description: SondeHub telemetry format

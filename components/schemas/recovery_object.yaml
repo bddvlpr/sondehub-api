@@ -1,0 +1,37 @@
+required:
+  - alt
+  - lat
+  - lon
+  - recovered
+  - recovered_by
+  - serial
+type: object
+properties:
+  datetime:
+    type: string
+    description: Time that the radiosonde was recovered
+    format: date-time
+  serial:
+    type: string
+    description: Serial number of the radiosonde
+  lat:
+    type: number
+    description: Latitude (decimal degrees) of the recovery location
+    format: double
+  lon:
+    type: number
+    description: Longitude (decimal degrees) of the recovery location
+    format: double
+  alt:
+    type: number
+    description: Altitude (metres) of the recovery location
+    format: double
+  recovered:
+    type: boolean
+    description: was this recovery attempt was successful
+  recovered_by:
+    type: string
+    description: callsign or name of the person who recovered the sonde
+  description:
+    type: string
+    description: Description of the recovery effort

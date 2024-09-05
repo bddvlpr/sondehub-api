@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: SondeHub
+  description: SondeHub v2 API
+  termsOfService: http://github.com/projecthorus/sondehub-infra
+  contact:
+    email: vk3fur@sondehub.org
+  license:
+    name: Creative Commons BY-SA 2.0
+    url: https://creativecommons.org/licenses/by-sa/2.0/
+  version: 2.0.0
+externalDocs:
+  description: Sondehub Infra
+  url: http://github.com/projecthorus/sondehub-infra
+servers:
+  - url: https://api.v2.sondehub.org
+paths:
+  /amateur/telemetry:
+    $ref: paths/amateur_telemetry.yaml
+  /amateur/telemetry/{payload_callsign}:
+    $ref: paths/amateur_telemetry_{payload_callsign}.yaml
+  /sondes/telemetry:
+    $ref: paths/sondes_telemetry.yaml
+  /amateur:
+    $ref: paths/amateur.yaml
+  /sondes:
+    $ref: paths/sondes.yaml
+  /sondes/site/{site}:
+    $ref: paths/sondes_site_{site}.yaml
+  /sonde/{serial}:
+    $ref: paths/sonde_{serial}.yaml
+  /amateur/listeners:
+    $ref: paths/amateur_listeners.yaml
+  /amateur/listeners/telemetry:
+    $ref: paths/amateur_listeners_telemetry.yaml
+  /listeners:
+    $ref: paths/listeners.yaml
+  /listeners/telemetry:
+    $ref: paths/listeners_telemetry.yaml
+  /listeners/stats:
+    $ref: paths/listeners_stats.yaml
+  /sondes/websocket:
+    $ref: paths/sondes_websocket.yaml
+  /predictions:
+    $ref: paths/predictions.yaml
+  /predictions/reverse:
+    $ref: paths/predictions_reverse.yaml
+  /recovered:
+    $ref: paths/recovered.yaml
+  /recovered/stats:
+    $ref: paths/recovered_stats.yaml
+  /sites:
+    $ref: paths/sites.yaml
+x-original-swagger-version: '2.0'
