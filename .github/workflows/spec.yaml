@@ -19,4 +19,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         draft: true
-        files: result/openapi.yaml
+        files: |
+          result/openapi.yaml
+          result/openapi.json

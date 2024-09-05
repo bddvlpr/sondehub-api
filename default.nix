@@ -12,5 +12,7 @@ stdenvNoCC.mkDerivation {
     mkdir $out
     redocly-cli bundle \
       --output $out/openapi.yaml
+    redocly-cli bundle \
+      --output $out/openapi.json
   '';
 }
