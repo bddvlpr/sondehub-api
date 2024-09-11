@@ -2,6 +2,5 @@ type: object
 properties:
   serial:
     type: object
-    properties:
-      datetime:
-        $ref: ./listener.yaml
+    additionalProperties:
+      $ref: ./listener.yaml
