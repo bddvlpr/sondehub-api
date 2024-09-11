@@ -1,6 +1,5 @@
 type: object
-properties:
-  serial:
-    type: object
-    additionalProperties:
-      $ref: ./listener.yaml
+additionalProperties:
+  type: object
+  additionalProperties:
+    $ref: ./listener.yaml
