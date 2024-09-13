@@ -1,6 +1,5 @@
 type: object
-properties:
-  serial:
-    type: object
-    additionalProperties:
-      $ref: ./telemetry_format.yaml
+additionalProperties:
+  type: object
+  additionalProperties:
+    $ref: ./telemetry_format.yaml
